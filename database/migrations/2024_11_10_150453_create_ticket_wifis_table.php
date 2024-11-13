@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('profile')->nullable();
             $table->string('time_limit')->nullable();
             $table->string('data_limit')->nullable();
-            $table->string('comment')->nullable();
+            $table->longText('comment')->nullable();
             $table->timestamps();
             $table->foreign('zone_wifi_id')->references('id')->on('zone_wifis')->onDelete('cascade')->onUpdate('cascade');
         });
