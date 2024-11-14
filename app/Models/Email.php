@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperEmail
+ */
 class Email extends Model
 {
     protected $guarded=['id'];

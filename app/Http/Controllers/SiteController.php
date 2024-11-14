@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Validator;
 class SiteController extends Controller
 {
     function index(){
-        return view('index');
+        $message="Your email submited";
+        return view('index',compact('message'));
     }
     function submitEmail(Request $request){
        // dd($request);
-        $validator=Validator::make($request->all(),[
+       /* $validator=Validator::make($request->all(),[
             "first_name"=>"required",
             "last_name"=>"required",
             "subject"=>"required",
@@ -24,8 +25,8 @@ class SiteController extends Controller
 
         if($validator->stopOnFirstFailure()->fails()){
             $error=['error'=>$validator->errors()];
-            dd($error);
-            return redirect()->route('site.index',compact('error'));
+            //dd($error);
+            return redirect()->route('site.index',['message'=>$error]);
 
         }
         $validated=$validator->safe()->all();
@@ -34,9 +35,10 @@ class SiteController extends Controller
         }catch(\Exception $e){
             $error = ['error' => __('Something went wrong! Please try again')];
             //return Response::error($error, null, 500);
-            return redirect()->route('site.index',compact('error'));
-        }
+            return redirect()->route('site.index',['error'=>$error]);
+        }*/
         $success=['success'=>["Your email subnited"]];
-        return redirect()->route('site.index',compact('success'));
+        //return back()->with(['message'=>'Your email submited']);
+        return redirect()->route('site.index',['message'=>'Your email submited']);
     }
 }

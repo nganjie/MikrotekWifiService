@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperTicketWifi
+ */
 class TicketWifi extends Model
 {
     protected $fillable=[

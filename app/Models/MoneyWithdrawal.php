@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperMoneyWithdrawal
+ */
 class MoneyWithdrawal extends Model
 {
     protected $fillable=[

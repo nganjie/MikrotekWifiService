@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @mixin IdeHelperZoneWifi
+ */
 class ZoneWifi extends Model
 {
     protected $fillable=[
