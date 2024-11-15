@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Email;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class SiteController extends Controller
 {
-    function index(){
+    function index() :View{
         $message="Your email submited";
-        return view('index',compact('message'));
+        return view('index',['message'=>$message]);
+    }
+    public function changeLanguage(string $lang){
+        //dd($lang);
+        if (in_array($lang, ['en', 'fr'])) {
+            //dd($lang);
+            App::setLocale($lang);
+            session(['locale' => $lang]); // Enregistrer la langue dans la session
+        }
+        //dd(Session::get('lang'));
+        return redirect()->back();
     }
     function submitEmail(Request $request){
        // dd($request);
@@ -38,7 +51,7 @@ class SiteController extends Controller
             return redirect()->route('site.index',['error'=>$error]);
         }*/
         $success=['success'=>["Your email subnited"]];
-        //return back()->with(['message'=>'Your email submited']);
-        return redirect()->route('site.index',['message'=>'Your email submited']);
+        return back()->with(['message'=>'Your email submited']);
+        //return redirect()->route('site.index',['message'=>'Your email submited']);
     }
 }
