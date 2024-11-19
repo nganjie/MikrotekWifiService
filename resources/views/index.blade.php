@@ -2,17 +2,7 @@
   @extends('base')
   @section('title','MikrotekWifi')
   @section('main')
-  @if(session()->has('message'))
-  <script>
-    console.log('un monde de merde')
-    jQuery('.top-right').notify({  
-    message: { text: "{{ Session::get('message') }}" }  
-  }).show();  
- @php  
-   Session::forget('message');  
- @endphp 
- @endif
-    </script>
+  
   
     <section id="hero" class="hero section dark-background">
       <img src="assets/img/hero-bg-2.jpg" alt="" class="hero-bg">
@@ -27,7 +17,7 @@
             <h1>{{__("site.about manage")}}<span>MikrotekWifi</span></h1>
             <p>{{__("site.Convert your Wi-Fi network into a competitive advantage!")}}</p>
             <div class="d-flex">
-              <a href="#about" class="btn-get-started">{{__("site.Get Started")}}</a>
+              <a href="{{route('site.signup.user')}}" class="btn-get-started">{{__("site.Get Started")}}</a>
               <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>{{__("site.Watch Video")}}</span></a>
             </div>
           </div>

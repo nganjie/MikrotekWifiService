@@ -9,8 +9,8 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{asset("assets/img/favicon.png")}}" rel="icon">
+  <link href="{{asset("assets/img/apple-touch-icon.png")}}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -18,17 +18,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js" integrity="sha512-vCgNjt5lPWUyLz/tC5GbiUanXtLX1tlPXVFaX5KAQrUHjwPcCwwPOLn34YBFqws7a7+62h7FRvQ1T0i/yFqANA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link href="{{asset("assets/vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+  <link href="{{asset("assets/vendor/bootstrap-icons/bootstrap-icons.css" )}}"rel="stylesheet">
+  <link href="{{asset("assets/vendor/aos/aos.css" )}}"rel="stylesheet">
+  <link href="{{asset("assets/vendor/glightbox/css/glightbox.min.css" )}}"rel="stylesheet">
+  <link href="{{asset("assets/vendor/swiper/swiper-bundle.min.css" )}}"rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"  integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"  integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+  <link href="{{asset("assets/css/main.css" )}}"rel="stylesheet">
 
 </head>
 
@@ -46,6 +45,7 @@
               <li><a href="#about">{{__("site.About")}}</a></li>
               <li><a href="#features">{{__("site.Features")}}</a></li>
               <li><a href="#pricing">{{__("site.Pricing")}}</a></li>
+              <li><a href="{{route('site.signup.user')}}">{{__("site.create account")}}</a></li>
               <li class="dropdown"><a href="#"><span>{{__("site.Language")}}</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="site/language-en">Englais</a></li>
@@ -106,14 +106,48 @@
   <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
+  <script src="{{asset("assets/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+  <script src="{{asset("assets/vendor/php-email-form/validate.js")}}"></script>
+  <script src="{{asset("assets/vendor/aos/aos.js")}}"></script>
+  <script src="{{asset("assets/vendor/glightbox/js/glightbox.min.js")}}"></script>
+  <script src="{{asset("assets/vendor/purecounter/purecounter_vanilla.js")}}"></script>
+  <script src="{{asset("assets/vendor/swiper/swiper-bundle.min.js")}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js" integrity="sha512-vCgNjt5lPWUyLz/tC5GbiUanXtLX1tlPXVFaX5KAQrUHjwPcCwwPOLn34YBFqws7a7+62h7FRvQ1T0i/yFqANA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="{{asset("assets/js/main.js")}}"></script>
+  @if(session()->has('success'))
+  <script>
+    toastr.options={
+        'progessBar':true,
+        'closeButton':true
+    };
+    toastr.success("{{Session::get("success")}}",{timeOut:12000})
+    console.log('un monde de merde')
+</script>
+ @endif
+ @if(session()->has('error'))
+ <script>
+   toastr.options={
+       'progessBar':true,
+       'closeButton':true
+   };
+   let err={!! Session::get('error') !!};
+   //console.log(err)
+   //console.log(err[0])
+   //console.log(err.length)
+   //toastr.success("{{Session::get("message")}}",{timeOut:12000})
+   //toastr.info("{{Session::get("message")}}")
+   //toastr.warning("{{Session::get("message")}}")
+   for (const [key, value] of Object.entries(err)) {
+  console.log(`${key}: ${value}`);
+  toastr.error(value,{timeOut:12000});
+}
+   
+   //console.log('un monde de merde')
+</script>
+@endif
+    
 </body>
 </html>

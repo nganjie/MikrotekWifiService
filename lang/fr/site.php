@@ -54,6 +54,22 @@ Avec la plateforme 'MikrotekWifi', la gestion de la vente de vos tickets de zone
     "month"=>"mois",
     "Send Message"=>"Envoyer un message",
     "Get Started"=>"Commencer",
-    "Watch Video"=>"Regarder la vidéo"
+    "Watch Video"=>"Regarder la vidéo",
+    "Phone"=>"Téléphone",
+    "your email has been sent successfully"=>"votre email a été envoyé avec succès",
+    "create account"=>"créer un compte",
+    "First Name"=>"Nom",
+    "Last Name"=>"prenom",
+    "Contry"=>"pays",
+    "Password"=>"Mot de passe",
+    "Confirm password"=>"Confirmez le mot de passe",
+    "City"=>"Ville",
+    "Create an account"=>"Créer un compte",
+    "Already have an account"=>"Vous avez déjà un compte",
+    "Login here"=>"Connectez-vous ici",
+    "passwords are not identical"=>"les mots de passe ne sont pas identiques",
+    "I accept the"=>"J'accepte les ",
+    "Terms and Conditions"=>"Termes et conditions",
+    "your account has been successfully created"=>"votre compte a été créé avec succès"
 ]
 ;

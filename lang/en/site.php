@@ -53,5 +53,21 @@ With the 'MikrotekWifi' platform, managing your WiFizone ticket sales activity b
     "month"=>"month",
     "Send Message"=>"Send Message",
     "Get Started"=>"Get Started",
-    "Watch Video"=>"Watch Video"
+    "Watch Video"=>"Watch Video",
+    "Phone"=>"Phone",
+    "your email has been sent successfully"=>"your email has been sent successfully",
+    "create account"=>"create account",
+    "First Name"=>"First Name",
+    "Last Name"=>"Last Name",
+    "Contry"=>"Contry",
+    "Password"=>"Password",
+    "Confirm password"=>"Confirm password",
+    "City"=>"City",
+    "Create an account"=>"Create an account",
+    "Already have an account"=>"Already have an account",
+    "Login here"=>"Login here",
+    "passwords are not identical"=>"passwords are not identical",
+    "I accept the"=>"I accept the",
+    "Terms and Conditions"=>"Terms and Conditions",
+    "your account has been successfully created"=>"your account has been successfully created"
 ];

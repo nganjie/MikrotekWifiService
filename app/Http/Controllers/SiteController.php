@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Email;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -15,6 +17,43 @@ class SiteController extends Controller
     function index() :View{
         $message="Your email submited";
         return view('index',['message'=>$message]);
+    }
+    public function showSignup(){
+        return view('signup');
+    }
+    public function createAccount(Request $request){
+       // dd($request);
+        $validator=Validator::make($request->all(),[
+            'first_name'=>'required',
+            'last_name'=>'required',
+            'city'=>'required',
+            'country'=>'required',
+            'country_code'=>'required',
+            'email'=>'required',
+            'number'=>'required|phone:contry_code',
+            'password'=>'required',
+            'confirm-password'=>'required'
+        ]);
+        
+        if($validator->stopOnFirstFailure()->fails()){
+            //$error=['error'=>$validator->errors()];
+            //dd($validator->errors());
+            return back()->with(['error'=>$validator->errors()]);
+
+        }
+        
+        if($request['password']!==$request['confirm-password']){
+            return back()->with(['warn'=>__("site.passwords are not identical")]);
+        }
+        //dd($validator);
+        $validated =$validator->safe()->except(['country_code','confirm-password']);
+        
+        //dd($validated);
+        $validated['password'] = Hash::make($validated['password']);
+        //dd($validated);
+        User::create($validated);
+        $success=['success'=>__("site.your account has been successfully created")];
+        return back()->with($success);
     }
     public function changeLanguage(string $lang){
         //dd($lang);
@@ -28,7 +67,7 @@ class SiteController extends Controller
     }
     function submitEmail(Request $request){
        // dd($request);
-       /* $validator=Validator::make($request->all(),[
+       $validator=Validator::make($request->all(),[
             "first_name"=>"required",
             "last_name"=>"required",
             "subject"=>"required",
@@ -37,9 +76,9 @@ class SiteController extends Controller
         ]);
 
         if($validator->stopOnFirstFailure()->fails()){
-            $error=['error'=>$validator->errors()];
-            //dd($error);
-            return redirect()->route('site.index',['message'=>$error]);
+            //$error=['error'=>$validator->errors()];
+            //dd($validator->errors());
+            return back()->with(['error'=>$validator->errors()]);
 
         }
         $validated=$validator->safe()->all();
@@ -49,9 +88,9 @@ class SiteController extends Controller
             $error = ['error' => __('Something went wrong! Please try again')];
             //return Response::error($error, null, 500);
             return redirect()->route('site.index',['error'=>$error]);
-        }*/
-        $success=['success'=>["Your email subnited"]];
-        return back()->with(['message'=>'Your email submited']);
+        }
+        $success=['success'=>__("site.your email has been sent successfully")];
+        return back()->with($success);
         //return redirect()->route('site.index',['message'=>'Your email submited']);
     }
 }
