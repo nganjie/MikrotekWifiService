@@ -13,7 +13,7 @@
 
     @vite('resources/css/app.css')
     @vite('resources/css/style.css')
-    @vite('resources/js/app.js')
+    @vite('resources/js/singup.js')
 
 </head>
 <body>
@@ -28,6 +28,9 @@
                     <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         {{__("site.Create an account")}}
                     </h1>
+                    @if(Session::has('success'))
+                        <p class="text-sky-500">{{Session::get('success')}}</p>
+                    @endif
                     <form class=" space-y-4 md:space-y-6" action="{{route("site.create.account")}}" method="POST">
                         @csrf
                         <div class="flex flex-row" >

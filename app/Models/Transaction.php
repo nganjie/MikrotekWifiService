@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @mixin IdeHelperTransaction
@@ -23,4 +24,10 @@ class Transaction extends Model
         'operation_reference',
         'is_collected',
     ];
+    public function ticketWifi():BelongsTo{
+        return $this->belongsTo(TicketWifi::class);
+    }
+    public function moneyWithdrawal():BelongsTo{
+        return $this->belongsTo(MoneyWithdrawal::class);
+    }
 }

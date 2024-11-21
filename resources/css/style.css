@@ -3,6 +3,9 @@
 /*.select-box {
     height: 30px;
 }*/
+body{
+    height: auto;
+}
 
 .select-box input {
     width: 100%;

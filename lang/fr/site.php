@@ -70,6 +70,7 @@ Avec la plateforme 'MikrotekWifi', la gestion de la vente de vos tickets de zone
     "passwords are not identical"=>"les mots de passe ne sont pas identiques",
     "I accept the"=>"J'accepte les ",
     "Terms and Conditions"=>"Termes et conditions",
-    "your account has been successfully created"=>"votre compte a été créé avec succès"
+    "your account has been successfully created"=>"votre compte a été créé avec succès",
+    "your account has been created successfully. Please log in to your email , account to have your connection information"=>"votre compte a été créé avec succès. Merci de vous connecter à votre compte mail :realemail pour avoir vos informations de connexion"
 ]
 ;

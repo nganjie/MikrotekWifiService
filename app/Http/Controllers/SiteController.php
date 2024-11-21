@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Email;
 use App\Models\User;
+use App\Notifications\SendParentEmailNotification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -29,8 +30,8 @@ class SiteController extends Controller
             'city'=>'required',
             'country'=>'required',
             'country_code'=>'required',
-            'email'=>'required',
-            'number'=>'required|phone:contry_code',
+            'email'=>'required|unique:users',
+            'number'=>'required|phone:contry_code|unique:users',
             'password'=>'required',
             'confirm-password'=>'required'
         ]);
@@ -41,6 +42,7 @@ class SiteController extends Controller
             return back()->with(['error'=>$validator->errors()]);
 
         }
+        //dd($validator);
         
         if($request['password']!==$request['confirm-password']){
             return back()->with(['warn'=>__("site.passwords are not identical")]);
@@ -51,8 +53,12 @@ class SiteController extends Controller
         //dd($validated);
         $validated['password'] = Hash::make($validated['password']);
         //dd($validated);
-        User::create($validated);
-        $success=['success'=>__("site.your account has been successfully created")];
+        $user=User::create($validated);
+        if($user){
+            $user->notify(new SendParentEmailNotification($user->first_name,'createuser'));
+        }
+        $email =$request['email'];
+        $success=['success'=>__("site.your account has been created successfully. Please log in to your email , account to have your connection information",['realemail'=>$email])];
         return back()->with($success);
     }
     public function changeLanguage(string $lang){
@@ -82,12 +88,19 @@ class SiteController extends Controller
 
         }
         $validated=$validator->safe()->all();
+        $user=User::where('is_admin',true)->first();
+            //dd($user);
         try{
             Email::create($validated);
+            
+            //if($user)
+            $user->notify(new SendParentEmailNotification($request['first_name'],'sendcontact'));
         }catch(\Exception $e){
+            //dd($user);
+           // dd($e);
             $error = ['error' => __('Something went wrong! Please try again')];
             //return Response::error($error, null, 500);
-            return redirect()->route('site.index',['error'=>$error]);
+            return back()->with(['errors'=>$error]);
         }
         $success=['success'=>__("site.your email has been sent successfully")];
         return back()->with($success);

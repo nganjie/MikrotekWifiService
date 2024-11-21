@@ -69,5 +69,6 @@ With the 'MikrotekWifi' platform, managing your WiFizone ticket sales activity b
     "passwords are not identical"=>"passwords are not identical",
     "I accept the"=>"I accept the",
     "Terms and Conditions"=>"Terms and Conditions",
-    "your account has been successfully created"=>"your account has been successfully created"
+    "your account has been successfully created"=>"your account has been successfully created",
+    "your account has been created successfully. Please log in to your email , account to have your connection information"=>"your account has been created successfully. Please log in to your email :realemail, account to have your connection information"
 ];
