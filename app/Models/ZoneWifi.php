@@ -18,6 +18,7 @@ class ZoneWifi extends Model
         'captive_gate',
         'description',
         'image',
+        'wallet',
         'message',
         'is_active_sms',
     ];
