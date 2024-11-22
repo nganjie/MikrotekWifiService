@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ticket_wifis', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('zone_wifi_id');
+            $table->uuid('id')->primary();
+            $table->uuid('zone_wifi_id');
             $table->string('username');
             $table->string('password');
             $table->string('profile')->nullable();

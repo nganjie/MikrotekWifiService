@@ -93,7 +93,7 @@ class SiteController extends Controller
         try{
             Email::create($validated);
             
-            //if($user)
+            if($user)
             $user->notify(new SendParentEmailNotification($request['first_name'],'sendcontact'));
         }catch(\Exception $e){
             //dd($user);

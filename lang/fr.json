@@ -1,4 +1,5 @@
 {
+    "incorrect identifiers":"identifiants incorrect",
     "(and :count more error)": "(et :count erreur en plus)",
     "(and :count more errors)": "(et :count erreur en plus)|(et :count erreurs en plus)|(et :count erreurs en plus)",
     "A decryption key is required.": "A decryption key is required.",

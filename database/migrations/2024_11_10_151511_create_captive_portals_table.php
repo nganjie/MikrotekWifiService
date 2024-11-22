@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('captive_portals', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('zone_wifi_id');
+            $table->uuid('id')->primary();
+            $table->uuid('zone_wifi_id');
             $table->json('code')->nullable();
             $table->timestamps();
             $table->foreign('zone_wifi_id')->references('id')->on('zone_wifis')->onDelete('cascade')->onUpdate('cascade');

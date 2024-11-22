@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('ticket_wifi_id');
-            $table->unsignedBigInteger('money_withdrawal_id');
+            $table->uuid('id')->primary();
+            $table->uuid('ticket_wifi_id');
+            $table->uuid('money_withdrawal_id');
             $table->string('type');
             $table->string('status');
             $table->string('receiver_number');

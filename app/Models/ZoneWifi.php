@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class ZoneWifi extends Model
 {
+    use HasUuids;
+    public $incrementing = false;
     protected $fillable=[
         'user_id',
         'name',
@@ -19,6 +22,7 @@ class ZoneWifi extends Model
         'description',
         'image',
         'wallet',
+        'city',
         'message',
         'is_active_sms',
     ];

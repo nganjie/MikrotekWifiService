@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Email extends Model
 {
+    use HasUuids;
+    public $incrementing = false;
     protected $guarded=['id'];
     protected $fillable=[
         'first_name',

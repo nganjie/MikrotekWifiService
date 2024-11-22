@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('zone_wifis', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->string('name');
             $table->string('captive_gate');
             $table->longText('description')->nullable();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+            $table->string('city')->nullable();
             $table->longText('message')->nullable();
             $table->boolean('is_active_sms')->default(true);
             $table->double('wallet',8,2,true)->default(0);

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pakages', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('admin_id');
+            $table->uuid('id')->primary();
+            $table->uuid('admin_id');
             $table->string('type')->unique()->index();
             $table->string('name');
             $table->decimal('fixed_charge',8,2,true)->default(0);
