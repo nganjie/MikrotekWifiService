@@ -62,7 +62,8 @@ Route::middleware('auth:sanctum')->prefix('admin/')->name('admin.')->group(funct
         Route::post('{pakage}/choice-pakage-user','choicePakage')->name('choice.pakage');
     });
     Route::controller(TransactionController::class)->prefix('transactions/')->name('transactions.')->group(function(){
-        Route::post('{zone_wifi}/{tiket_wifi}/buyTicket','buyTiket');
+        Route::get('alls','index')->name('all');
+        Route::get('{transaction}/details','details')->name('details');
     });
     Route::controller(PayementGatewayController::class)->prefix('payement-gateway/')->name('payement.gateway.')->group(function (){
         Route::get('{pakage_wifi}/buyTicket/{amount}','buyTicket');
