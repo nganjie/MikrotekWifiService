@@ -35,6 +35,7 @@ class User extends Authenticatable
         'is_activate',
         'email',
         'password',
+        'state'
     ];
 
     /**
@@ -60,10 +61,10 @@ class User extends Authenticatable
         ];
     }
     public function zoneWifis():HasMany{
-        return $this->hasMany(ZoneWifi::class);
+        return $this->hasMany(ZoneWifi::class,'user_id');
     }
     public function pakages():HasMany{
-        return $this->hasMany(Pakage::class);
+        return $this->hasMany(Pakage::class,'admin_id');
     }
     public function pakageUser():HasMany{
         return $this->hasMany(PakageUser::class);

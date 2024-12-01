@@ -16,7 +16,7 @@ class SendParentEmailNotification extends Notification
      */
     protected $name='';
     protected $type='';
-    public function __construct($name,$type)
+    public function __construct($name,$type='')
     {
         $this->name=$name;
         $this->type=$type;
@@ -40,7 +40,7 @@ class SendParentEmailNotification extends Notification
         switch($this->type){
             case 'createuser':return $this->mailCreateUser();
             case 'sendcontact':return $this->mailSendContact();
-            default : return $this->mailCreateUser();
+            default : return $this->otherMail();
         }
     }
     public function mailCreateUser():MailMessage{
@@ -51,6 +51,12 @@ class SendParentEmailNotification extends Notification
                     ->line('Thank you for using our application!');
     }
     public function mailSendContact():MailMessage{
+        
+        return (new MailMessage)
+                    ->line("Bonjour/Bonsoir monsieur l'administrateur, l'utilisateur : $this->name vient de vous laisser un mail")
+                    ->action('allez sur la page admin', url('/'));
+    }
+    public function otherMail():MailMessage{
         
         return (new MailMessage)
                     ->line("Bonjour/Bonsoir monsieur l'administrateur, l'utilisateur : $this->name vient de vous laisser un mail")

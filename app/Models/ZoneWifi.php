@@ -29,8 +29,8 @@ class ZoneWifi extends Model
     public function user():BelongsTo{
         return $this->belongsTo(User::class);
     }
-    public function tickets():HasMany{
-        return $this->hasMany(TicketWifi::class);
+    public function pakageWifis():HasMany{
+        return $this->hasMany(PakageWifi::class,'zone_wifi_id');
     }
     public function captivePortail():HasOne{
         return $this->hasOne(CaptivePortail::class);

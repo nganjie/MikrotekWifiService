@@ -19,8 +19,9 @@ return new class extends Migration
             $table->decimal('fixed_charge',8,2,true)->default(0);
             $table->decimal('percent_charge',8,2,true)->default(0);
             $table->decimal('min_limit',8,2,true)->default(0);
+            $table->string('state')->default('active');
             $table->timestamps();
-            $table->foreign('admin_id')->references('id')->on('ticket_wifis')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

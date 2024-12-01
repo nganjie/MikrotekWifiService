@@ -55,7 +55,7 @@ class SiteController extends Controller
         //dd($validated);
         $user=User::create($validated);
         if($user){
-            $user->notify(new SendParentEmailNotification($user->first_name,'createuser'));
+           // $user->notify(new SendParentEmailNotification($user->first_name,'createuser'));
         }
         $email =$request['email'];
         $success=['success'=>__("site.your account has been created successfully. Please log in to your email , account to have your connection information",['realemail'=>$email])];
@@ -105,5 +105,8 @@ class SiteController extends Controller
         $success=['success'=>__("site.your email has been sent successfully")];
         return back()->with($success);
         //return redirect()->route('site.index',['message'=>'Your email submited']);
+    }
+    public function backToPayement(Request $request){
+        dd($request);
     }
 }

@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('captive_portals', function (Blueprint $table) {
+        Schema::create('payement_gateways', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('zone_wifi_id');
-            $table->json('code')->nullable();
+            $table->longText('site_id');
+            $table->longText('secret_key');
+            $table->longText('api_key');
+            $table->longText('url');
             $table->timestamps();
-            $table->foreign('zone_wifi_id')->references('id')->on('zone_wifis')->onDelete('cascade')->onUpdate('cascade');
         });
-        
-       
     }
 
     /**
@@ -27,7 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('captive_portals');
-        
+        Schema::dropIfExists('payement_gateways');
     }
 };

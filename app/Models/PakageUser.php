@@ -17,6 +17,7 @@ class PakageUser extends Model
         'user_id',
         'pakage_id',
         'status',
+        'state'
     ];
     public function user():BelongsTo{
         return $this->belongsTo(User::class);

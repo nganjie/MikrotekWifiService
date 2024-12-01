@@ -16,5 +16,8 @@ Route::controller(SiteController::class)->group(function(){
         Route::get("signup/user","showSignup")->name("signup.user");
         Route::post("create-account","createAccount")->name("create.account");
     });
+    Route::prefix('payement/')->name('payement.')->group(function (){
+        Route::get('return/ticket','backToPayement')->name('return.ticket');
+    });
     
 });

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->longText('message')->nullable();
             $table->boolean('is_active_sms')->default(true);
             $table->double('wallet',8,2,true)->default(0);
+            $table->string('state')->default('active');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });

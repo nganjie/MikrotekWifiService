@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->uuid('pakage_id');
             $table->boolean('status')->default(true);
+            $table->string('state')->default('active');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('pakage_id')->references('id')->on('pakages')->onDelete('cascade')->onUpdate('cascade');

@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('ticket_wifi_id');
-            $table->uuid('money_withdrawal_id');
+            $table->uuid('money_withdrawal_id')->nullable();
             $table->string('type');
             $table->string('status');
-            $table->string('receiver_number');
-            $table->string('price');
+            $table->string('receiver_number')->nullable();
+            $table->decimal('price',8,2,true);
             $table->string('charge')->nullable();
             $table->string('sms_charge')->nullable();
-            $table->string('net_price');
+            $table->decimal('net_price',8,2,true)->nullable();
             $table->string('vendor_reference')->nullable();
             $table->string('operation_reference')->nullable();
             $table->boolean('is_collected')->default(false);
