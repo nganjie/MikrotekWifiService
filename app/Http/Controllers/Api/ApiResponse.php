@@ -8,7 +8,7 @@ class ApiResponse{
     }
     public static function success($data,$message = null)
     {
-        return response()->json([ 'message' => $message,'data' => $data,'success'=>true], 200);
+        return response()->json([ 'message' => $message,'data' => $data,'success'=>true,'error_code'=>200,'error'=>''], 200);
     }
     public static function onlysuccess($message = null)
     {
@@ -37,7 +37,7 @@ class ApiResponse{
 
     public static function error($message = 'Something Went Wrong', $data = null)
     {
-        return response()->json(['data' => $data, 'message' => $message,'success'=>false], 400);
+        return response()->json(['data' => $data, 'message' => $message,'success'=>false,'error_code'=>400,'error'=>'']);
     }
 
     public static function validation($message = 'Invalid Submission', $data = null)

@@ -40,6 +40,7 @@ Route::middleware('auth:sanctum')->prefix('admin/')->name('admin.')->group(funct
         Route::put('{zone_wifi}/update','update')->name('update');
         Route::delete('{zone_wifi}/delete','delete')->name('delete');
         Route::get('all','all');
+        Route::get('{zone_wifi}/detail','detail')->name('detail');
     });
     Route::controller(PakageWifiController::class)->prefix('pakage-wifi/')->name('pakage.wifi.')->group(function (){
         Route::post('{zone_wifi}/create','create')->name('create');

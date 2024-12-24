@@ -18,7 +18,7 @@ class PakageWifiController extends Controller
         try{
             $user=User::where('id',Auth::user()->id)->first();
             //$data=$user->zoneWifis()->with('pakageWifis')->get();
-            $data=PakageWifi::with('zoneWifis')->whereRelation('zoneWifis','user_id',$user->id)->paginate($request->input('per_page',4));
+            $data=PakageWifi::latest()->with('zoneWifis')->whereRelation('zoneWifis','user_id',$user->id)->paginate($request->input('per_page',4));
            // $z=ZoneWifi::first()->with('pakage_wifi');
             return ApiResponse::success($data);
         }catch(\Exception $e){
@@ -49,7 +49,8 @@ class PakageWifiController extends Controller
     }
     public function details(PakageWifi $pakageWifi){
         try{
-            return ApiResponse::success($pakageWifi);
+            //$pakage=
+            return ApiResponse::success(PakageWifi::with('zoneWifis')->find($pakageWifi->id));
         }catch(\Exception $e){
             throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));
         }
