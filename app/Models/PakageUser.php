@@ -16,6 +16,7 @@ class PakageUser extends Model
     protected $fillable=[
         'user_id',
         'pakage_id',
+        'is_send_message',
         'status',
         'state'
     ];

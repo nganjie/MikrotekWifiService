@@ -16,7 +16,7 @@ class WifiZoneController extends Controller
 {
     public function all(Request $request){
         try{
-            $query=ZoneWifi::query();
+            /*$query=ZoneWifi::query();
             $perPage=1;
             $page=$request->input('page',1);
             $search =$request->input('search');
@@ -24,9 +24,18 @@ class WifiZoneController extends Controller
                 $query->whereRaw("name LIKE '%".$search."%'");
             }
             $total =$query->count();
-            $result=$query->offset(($page-1)*$perPage)->limit($perPage)->get();
+            $result=$query->offset(($page-1)*$perPage)->limit($perPage)->get();*/
             //dd($request->all());
-            $data=ZoneWifi::latest()->where('state','!=',StateEnum::DELETED)->paginate($request->input('per_page',4));
+            $data=ZoneWifi::current($request->input('user_id',null))->latest()->where('state','!=',StateEnum::DELETED)->paginate($request->input('per_page',4));
+            return ApiResponse::success($data);
+        }catch(\Exception $e){
+            throw new HttpResponseException(ApiResponse::error('something went wrong',$e));
+        }
+    }
+    public function full(Request $request){
+        try{
+            //dd($request->all());
+            $data=ZoneWifi::current($request->input('user_id',null))->latest()->where('state','!=',StateEnum::DELETED)->get();
             return ApiResponse::success($data);
         }catch(\Exception $e){
             throw new HttpResponseException(ApiResponse::error('something went wrong',$e));

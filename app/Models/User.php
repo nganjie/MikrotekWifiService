@@ -72,4 +72,7 @@ class User extends Authenticatable
     public function moneyWithdrawals():HasMany{
         return $this->hasMany(MoneyWithdrawal::class);
     }
+    public function isAdmin():bool{
+        return $this->is_admin;
+    }
 }

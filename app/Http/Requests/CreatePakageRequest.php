@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Enum\PakageEnum;
+use App\Enum\PakageTypeEnum;
+use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -13,7 +15,7 @@ class CreatePakageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::user()->is_admin;;
     }
 
     /**
@@ -24,10 +26,11 @@ class CreatePakageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'=>['required',new Enum(PakageEnum::class)],
+            'type'=>['required',new Enum(PakageTypeEnum::class)],
             'name'=>['required','string'],
-            'fixed_charge'=>['numeric','required_if:type,'.PakageEnum::FIXEDCHARGE->label()],
-            'percent_charge'=>['numeric','required_if:type,'.PakageEnum::PERCENTCHARGE->label()],
+            'fixed_charge'=>['numeric'],
+            'sms_charge'=>['numeric'],
+            'percent_charge'=>['numeric','required_if:type,'.PakageTypeEnum::UNIT->label()],
             'min_limit'=>['numeric','required'],
         ];
     }

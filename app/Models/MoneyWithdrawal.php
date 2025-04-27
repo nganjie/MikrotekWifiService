@@ -19,7 +19,9 @@ class MoneyWithdrawal extends Model
         'status',
         'pakage_type',
         'receiver_number',
+        'remark',
         'amount',
+        
     ];
     public function user():BelongsTo{
         return $this->belongsTo(User::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enum\PakageEnum;
+use App\Enum\PakageTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -24,10 +25,10 @@ class UpdatePakageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type'=>[new Enum(PakageEnum::class)],
+            'type'=>[new Enum(PakageTypeEnum::class)],
             'name'=>['string'],
-            'fixed_charge'=>['required_if:type,'.PakageEnum::FIXEDCHARGE->label()],
-            'percent_charge'=>['required_if:type,'.PakageEnum::PERCENTCHARGE->label()],
+            'fixed_charge'=>['numeric'],
+            'percent_charge'=>['required_if:type,'.PakageTypeEnum::UNIT->label()],
             'min_limit'=>['numeric'],
         ];
     }

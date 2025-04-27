@@ -19,6 +19,7 @@ class Pakage extends Model
         'type',
         'name',
         'fixed_charge',
+        'sms_charge',
         'percent_charge',
         'min_limit',
         'state'

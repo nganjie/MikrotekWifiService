@@ -3,16 +3,50 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreatePayementGatewayRequest;
 use App\Http\Requests\UpdatePayementGatewayRequest;
 use App\Models\PayementGateway;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 class AdminComtroller extends Controller
 {
+
+    public function create(CreatePayementGatewayRequest $request){
+        try{
+            //dd($request->file('image'));
+            $validated=$request->validated();
+            //$validated['user_id']=Auth::user()->id;
+            
+            $payementGateway=PayementGateway::create($validated);
+            return ApiResponse::success($payementGateway);
+        }catch(\Exception $e){
+            throw new HttpResponseException(ApiResponse::error('something went wrong',$e));
+        }
+    }
+    public function gateway(Request $request){
+        try{
+            $user=User::where('id',Auth::user()->id)->first();
+            //$data=$user->zoneWifis()->with('pakageWifis')->get();
+            $data=PayementGateway::paginate($request->input('per_page',4));
+           // $z=ZoneWifi::first()->with('pakage_wifi');
+            return ApiResponse::success($data);
+        }catch(\Exception $e){
+            throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));
+        }
+    }
     public function index(){
         return ApiResponse::success(Auth::user());
+    }
+    public function details(PayementGateway $payementGateway){
+        try{
+            //$pakage->update($validated);
+            return ApiResponse::success($payementGateway);
+        }catch(\Exception $e){
+            throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));
+        }
     }
     public function payementGateway(){
         //$payementGateway=PayementGateway::first();

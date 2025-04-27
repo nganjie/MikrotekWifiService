@@ -18,16 +18,17 @@ return new class extends Migration
             $table->string('type');
             $table->string('status');
             $table->string('receiver_number')->nullable();
-            $table->decimal('price',8,2,true);
+            $table->decimal('price',15,8,true);
             $table->string('charge')->nullable();
             $table->string('sms_charge')->nullable();
-            $table->decimal('net_price',8,2,true)->nullable();
+            $table->decimal('net_price',15,8,true)->nullable();
             $table->string('vendor_reference')->nullable();
             $table->string('operation_reference')->nullable();
             $table->boolean('is_collected')->default(false);
             $table->timestamps();
             $table->foreign('ticket_wifi_id')->references('id')->on('ticket_wifis')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('money_withdrawal_id')->nullable()->references('id')->on('money_withdrawals')->onDelete('cascade')->onUpdate('cascade');
+            //$table->unique(['ticket_wifi_id','status']);
         });
     }
 

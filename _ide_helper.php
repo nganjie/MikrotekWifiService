@@ -14216,7 +14216,7 @@ namespace Illuminate\Support\Facades {
          */        public static function current()
         {
                         /** @var \Illuminate\Routing\Router $instance */
-                        return $instance->current();
+                        return $instance->current(Auth::user());
         }
                     /**
          * Check if a route with the given name exists.
@@ -16633,7 +16633,7 @@ namespace Illuminate\Support\Facades {
          */        public static function current()
         {
                         /** @var \Illuminate\Routing\UrlGenerator $instance */
-                        return $instance->current();
+                        return $instance->current(Auth::user());
         }
                     /**
          * Get the URL for the previous request.

@@ -22,7 +22,7 @@ class ImportTicketwifiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tickets'=>['mimes:csv']
+            'tickets'=>['required','file','mimes:csv']
         ];
     }
 }

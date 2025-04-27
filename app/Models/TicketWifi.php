@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,10 +27,14 @@ class TicketWifi extends Model
         'comment',
         'state'
     ];
+    public function scopeCurrent(Builder $query,string|null $user){
+        $user_id=$user?$user:Auth::user()->id;
+        return $query->whereRelation('pakageWifi.zoneWifis','user_id',$user_id);
+    }
     public function pakageWifi():BelongsTo{
         return $this->belongsTo(PakageWifi::class);
     }
-    public function transaction():HasOne{
-        return $this->hasOne(Transaction::class);
+    public function transaction():HasMany{
+        return $this->hasMany(Transaction::class);
     }
 }

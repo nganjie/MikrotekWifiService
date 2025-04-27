@@ -1,5 +1,6 @@
 <?php
 
+use App\Enum\PayementGatewayTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,11 @@ return new class extends Migration
     {
         Schema::create('payement_gateways', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->enum('name',[
+                PayementGatewayTypeEnum::CINETPAY->label(),
+                PayementGatewayTypeEnum::CAMPAY->label()
+            ]);
+            $table->boolean('is_active')->default(false);
             $table->longText('site_id');
             $table->longText('secret_key');
             $table->longText('api_key');

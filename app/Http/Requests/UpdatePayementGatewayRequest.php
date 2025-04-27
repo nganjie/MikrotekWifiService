@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Enum\PayementGatewayTypeEnum;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdatePayementGatewayRequest extends FormRequest
 {
@@ -23,10 +25,12 @@ class UpdatePayementGatewayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'site_id'=>['required','string'],
-            'secret_key'=>['required','string'],
-            'api_key'=>['required','string'],
-            'url'=>['required','string']
+            'name'=>[new Enum(PayementGatewayTypeEnum::class)],
+            'is_active'=>['boolean'],
+            'site_id'=>['string'],
+            'secret_key'=>['string'],
+            'api_key'=>['string'],
+            'url'=>['string']
         ];
     }
 }

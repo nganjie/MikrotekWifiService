@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Email;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Notifications\SendParentEmailNotification;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -21,6 +23,55 @@ class SiteController extends Controller
     }
     public function showSignup(){
         return view('signup');
+    }
+    public function showSucessTicket(Request $request,Transaction $transaction){
+        //dd($transaction);
+        $data=session()->get('data');
+        $ticket =$transaction->ticketWifi()->first();
+        $data=$ticket->with(['pakageWifi','pakageWifi.zoneWifis'])->first();
+        $zoneWifi= $data->pakageWifi->zoneWifis;
+        return view('response-ticket',[
+            'transaction'=>$transaction,
+            'ticket'=>$ticket,
+            'type'=>'SUCCESS',
+            'zoneWifi'=>$zoneWifi,
+            'data'=>$data
+        ]);
+    }
+    public function showFailedTicket(Request $request,Transaction $transaction){
+        //dd($transaction);
+        $data=session()->get('data');
+       // dd($data);
+        $ticket =$transaction->ticketWifi()->first();
+        return view('response-ticket',[
+            'transaction'=>$transaction,
+            'ticket'=>$ticket,
+            'type'=>'FAILED',
+            'data'=>$data
+        ]);
+    }
+    public function downloadTicket(Request $request,Transaction $transaction){
+       // dd($transaction);
+       try{
+        $data=session()->get('data');
+        $ticket =$transaction->ticketWifi()->first();
+        //dd($ticket);
+        $data=$ticket->with(['pakageWifi','pakageWifi.zoneWifis'])->first();
+        $zoneWifi= $data->pakageWifi->zoneWifis;
+        $pdf = Pdf::loadView('ticket', [
+            'transaction'=>$transaction,
+            'ticket'=>$ticket,
+            'type'=>'SUCCESS',
+            'zoneWifi'=>$zoneWifi,
+            'data'=>$data
+        ]);
+       
+        return $pdf->download('itsolutionstuff.pdf');
+        return redirect()->back();
+       }catch(\Exception $e){
+        dd($e);
+       }
+        
     }
     public function createAccount(Request $request){
        // dd($request);

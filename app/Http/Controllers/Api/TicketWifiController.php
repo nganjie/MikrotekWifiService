@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportTicketwifiRequest;
 use App\Models\PakageWifi;
 use App\Models\TicketWifi;
+use App\Models\User;
 use App\Models\ZoneWifi;
+use Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use League\Csv\Reader;
@@ -15,9 +17,35 @@ use PHPUnit\Framework\Attributes\Ticket;
 
 class TicketWifiController extends Controller
 {
-    public function index(Request $request,PakageWifi $pakageWifi){
+    public function index(Request $request){
         try{
-            $data=$pakageWifi->tickets()->latest()->where('state',StateEnum::ACTIVE)->paginate($request->input('per_page',4));
+            //return $pakageWifi;
+            /*$user=User::where('id',Auth::user()->id)->first();
+            $tickets = TicketWifi::whereHas('pakageWifi', function ($query) use ($user) {
+                $query->whereHas('zoneWifis', function ($query) use ($user) {
+                    $query->where('user_id', $user->id);
+                });
+            })->with('pakageWifi')->with('pakageWifi.zoneWifis')->get();*/
+            $data=TicketWifi::current($request->input('user_id',null))->latest()->where('state',StateEnum::ACTIVE)->with('pakageWifi')->with('pakageWifi.zoneWifis')->whereRelation('pakageWifi.zoneWifis','user_id',Auth::user()->id)->paginate($request->input('per_page',4));
+            //return $data;
+            //$data=$pakageWifi->tickets()->latest()->where('state',StateEnum::ACTIVE)->paginate($request->input('per_page',4));
+            return ApiResponse::success($data);
+        }catch(\Exception $e){
+            throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));
+        }
+    }
+    public function full(Request $request){
+        try{
+            $data=TicketWifi::current($request->input('user_id',null))->latest()->where('state',StateEnum::ACTIVE)->with('pakageWifi')->with('pakageWifi.zoneWifis')->whereRelation('pakageWifi.zoneWifis','user_id',Auth::user()->id)->latest()->get();
+            return ApiResponse::success($data);
+        }catch(\Exception $e){
+            throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));
+        }
+    }
+    public function ticketWifis(Request $request,PakageWifi $pakageWifi){
+        try{
+            $data=$pakageWifi->tickets()->with(['pakageWifi','pakageWifi.zoneWifis'])->paginate($request->input('per_page',4));
+           // $data=TicketWifi::latest()->where('state',StateEnum::ACTIVE)->with('pakageWifi')->with('pakageWifi.zoneWifis')->whereRelation('pakageWifi.zoneWifis','user_id',Auth::user()->id)->latest()->get();
             return ApiResponse::success($data);
         }catch(\Exception $e){
             throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));
@@ -26,8 +54,16 @@ class TicketWifiController extends Controller
     public function storeTickets(ImportTicketwifiRequest $request,PakageWifi $pakageWifi){
         try{
             //dump($zoneWifi);
+            //dd(json_encode(['data']));
             //$csv=array_map($request->file('tickets'));
+            /*if(Input::file('import_file') ){
+
+            }*/
+            $validated=$request->validated();
+           // return $validated;
             $file = $request->file('tickets');
+           // return $file;
+            //dd($file);
             $path = $file->getRealPath();
     
             // Lire et parcourir le contenu du fichier CSV
@@ -61,7 +97,7 @@ class TicketWifiController extends Controller
     }
     public function delete(TicketWifi $ticketWifi){
         try{
-            $ticketWifi->state=StateEnum::DESACTIVE;
+            $ticketWifi->state=StateEnum::DELETED;
             $ticketWifi->update();
             return ApiResponse::success($ticketWifi);
         }catch(\Exception $e){
@@ -70,7 +106,7 @@ class TicketWifiController extends Controller
     }
     public function details(TicketWifi $ticketWifi){
         try{
-            $data=$ticketWifi->load('transactions');
+            $data=TicketWifi::with(['pakageWifi','pakageWifi.zoneWifis'])->find($ticketWifi->id);
             return ApiResponse::success($data);
         }catch(\Exception $e){
             throw new HttpResponseException(ApiResponse::error('something went wrong',$e->getMessage()));

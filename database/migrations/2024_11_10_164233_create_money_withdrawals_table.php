@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('status');
             $table->string('pakage_type');
             $table->string('receiver_number');
-            $table->decimal('amount',8,2,true)->default(0);
+            //$table->longText('remark')->nullable();
+            $table->decimal('amount',15,8,true)->default(0);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
